@@ -7,7 +7,7 @@
             "Properties": {
                 "GroupName": "administrators",
                 "Users": [
-                    "admin"
+                    "dave.anderson"
                 ]
             }
         },
@@ -16,7 +16,7 @@
             "Properties": {
                 "GroupName": "trusted",
                 "Users": [
-                    "admin"
+                    "dave.anderson"
                 ]
             }
         }
