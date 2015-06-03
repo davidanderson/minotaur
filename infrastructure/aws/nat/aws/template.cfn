@@ -35,7 +35,7 @@
             "Description": "EC2 instance type",
             "Type": "String",
             "Default": "t2.small",
-            "AllowedValues" : [ 
+            "AllowedValues": [ 
                 "t2.micro", 
                 "t2.small", 
                 "t2.medium", 
@@ -55,7 +55,7 @@
                 "c4.xlarge", 
                 "r3.large", 
                 "r3.xlarge", 
-                "i2.xlarge", 
+                "i2.xlarge" 
             ],
             "ConstraintDescription": "must be a valid EC2 instance type."
         },
