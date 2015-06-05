@@ -1,5 +1,6 @@
 {
-  "id"        : "dave.anderson",
+  "id"        : "dave-anderson",
+  "username"  : "dave.anderson",
   "comment"   : "Dave Anderson",
   "ssh_keys"  : ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDe4cjppusAgxdGpwFjW8/b1vcEjeaE8GGp9RZJ6eNS+Sza2cKNdFMU6uomWDOAfT/ZpOwDlspH6Tb9GN+rpcAGymi09oligSM3Fza6YguN5Ter2zecA5y6iXaCSyyGgXq0NQcUiVKqYhty2PIV5D2sUOzKYXsmW5h26q4ZDZwkyQGQRVCchCwG57N4xepah+nkNiWYnQBo0bCRDbGcK0/LRDjcfuJGxtNFuNnsk61LSNs8jUAwXfCJm3hMB+05YxSmlN+4stciYg9RtJDvnBDvmpCpRsrVw21yeN2J9I/q+VRSDe8jahaZ7KNuXotbBRatVD3SwFsaybsPk+W9COFJ dave.anderson@dave-anderson-m.local"],
   "environments": ["rpt-poc"]
