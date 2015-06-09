@@ -36,6 +36,7 @@ INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data/instance-id)
 RUBY_URL="https://rvm_io.global.ssl.fastly.net/binaries/ubuntu/14.04/x86_64/ruby-2.1.5.tar.bz2"
 
 # Update repos and install dependencies
+add-apt-repository -y ppa:webupd8team/java
 apt-get update
 apt-get -y install git-core build-essential awscli
 
@@ -53,7 +54,7 @@ rvm rubygems current
 wget https://stedolan.github.io/jq/download/linux64/jq -O /usr/local/bin/jq
 chmod +x /usr/local/bin/jq
 
-git clone https://git@github.com/stealthly/minotaur.git "$REPO_DIR"
+git clone https://git@github.com/davidanderson/minotaur.git "$REPO_DIR"
 
 # Install Chef
 curl -L https://www.opscode.com/chef/install.sh | bash
