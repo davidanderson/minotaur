@@ -3,7 +3,17 @@
 
 # Overriding default attributes
 node.override['build-essential']['compile_time'] = true
+
+# Use Oracle JDK
 node.override['java']['jdk_version'] = '7'
+node.override['java']['install_flavor'] = 'oracle'
+# staged Oracle JDK tarballs and sha256sum checksums
+node.override['java']['jdk']['7']['x86_64']['url'] = 'https://s3.amazonaws.com/bronto-tmp/jdk-7u79-linux-x64.tar.gz'
+node.override['java']['jdk']['7']['x86_64']['checksum'] = '29d75d0022bfa211867b876ddd31a271b551fa10727401398295e6e666a11d90'
+node.override['java']['jdk']['8']['x86_64']['url'] = 'https://s3.amazonaws.com/bronto-tmp/jdk-8u45-linux-x64.tar.gz'
+node.override['java']['jdk']['7']['x86_64']['checksum'] = 'f298ca9239051dfddf8642fcc9e264f7fe5af10adb67027feb3a0ed0a1a2316d'
+node.override['java']['oracle']['accept_oracle_download_terms'] = true
+
 node.override['zookeeper']['version'] = ENV['zk_version'].to_s.empty? ? node[:zookeeper][:version] : ENV['zk_version']
 
 # Forming path's and uri's
@@ -20,6 +30,11 @@ config_path = ::File.join(node[:zookeeper][:install_dir],
                           "zookeeper-#{node[:zookeeper][:version]}",
                           'conf',
                           'zoo.cfg')
+
+java_config_path = ::File.join(node[:zookeeper][:install_dir],
+                          "zookeeper-#{node[:zookeeper][:version]}",
+                          'conf',
+                          'java.env')
 
 if node['zookeeper']['version'] == '3.3.6'
   node.override['zookeeper']['checksum'] = 'eb311ec0479a9447d075a20350ecfc5cf6a2a6d9842d13b59d7548430ac37521'
@@ -60,6 +75,16 @@ template "#{config_path}" do
   })
 end
 
+# config java flags / args 
+template "#{java_config_path}" do
+  source "java.env.erb"
+  user node[:zookeeper][:user]
+  mode "0755"
+  variables({
+    :jvmflags => "-Xms2g -Xmx2g"
+  })
+end
+
 # Creating data_dir
 directory node[:zookeeper][:data_dir] do
   owner node[:zookeeper][:user]
@@ -87,4 +112,5 @@ end
 # Subscribe to config changes
 service 'zookeeper' do
   subscribes :restart, resources(:template => "#{config_path}")
+  subscribes :restart, resources(:template => "#{java_config_path}")
 end
